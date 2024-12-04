@@ -129,6 +129,7 @@ USE_TZ = True
 LOGIN_URL = "login" # this is the url that the user will be redirected to if they are not logged in and try to access a page that requires authentication
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
