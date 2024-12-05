@@ -22,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY", "your-default-secret-key-for-dev")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "127.0.0.1 localhost").split(" ")
 
 
 # Application definition
@@ -87,8 +87,7 @@ DATABASES = {
     }
 }
 
-database_url = os.environ.get("DATABASE_URL")
-
+database_url = os.environ.get("DATABASE_URL", "sqlite:///db.sqlite3")
 DATABASES["default"] = dj_database_url.parse(database_url)
 
 
@@ -101,6 +100,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        'OPTIONS': {'min_length': 8},
     },
     {
         "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
@@ -129,7 +129,6 @@ USE_TZ = True
 LOGIN_URL = "login" # this is the url that the user will be redirected to if they are not logged in and try to access a page that requires authentication
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

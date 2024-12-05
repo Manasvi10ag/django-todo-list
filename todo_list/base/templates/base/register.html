@@ -9,22 +9,54 @@
     <form method="post">
         {% csrf_token %}
         
-        <label>{{form.username.label}}</label>
-        {{form.username}}
-        {{from.username.errors}}
+        <!-- Username Field -->
+        <label>{{ form.username.label }}</label>
+        {{ form.username }}
+        {% if form.username.errors %}
+            <ul class="error-list">
+                {% for error in form.username.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         
-        <label>{{form.password1.label}}</label>
-        {{form.password1}}
-        {{from.password1.errors}}
+        <!-- Password1 Field -->
+        <label>{{ form.password1.label }}</label>
+        {{ form.password1 }}
+        {% if form.password1.errors %}
+            <ul class="error-list">
+                {% for error in form.password1.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         
-        <label>{{form.password2.label}}</label>
-        {{form.password2}}
+        <!-- Password2 Field -->
+        <label>{{ form.password2.label }}</label>
+        {{ form.password2 }}
+        {% if form.password2.errors %}
+            <ul class="error-list">
+                {% for error in form.password2.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         
-        <!-- {{form.as_p}} -->
+        <!-- Submit Button -->
         <input style="margin-top: 20px; margin-bottom: 20px;" class="button" type="submit" value="Register">
     </form>
     
     <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
 </div>
+
+<!-- Error Styling -->
+<style>
+    .error-list {
+        color: red;
+        margin: 5px 0;
+        padding: 0;
+        list-style: none;
+    }
+</style>
 
 {% endblock content %}
